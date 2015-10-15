@@ -1,0 +1,41 @@
+[{
+  "username": "flyguy",
+  "name": {
+    "first": "John",
+    "last": "Legend"
+  },
+  "email": "flyestman@gmail.com",
+  "password": "northside2003"
+}, {
+  "username": "tobiscky",
+  "name": {
+    "first": "Tobi",
+    "last": "Adewale"
+  },
+  "email": "tobiscky2012@gmail.com",
+  "password": "112341234"
+}, {
+  "username": "prettydiva",
+  "name": {
+    "first": "Evelyn",
+    "last": "Clark"
+  },
+  "email": "evelyn_clark@yahoo.co.uk",
+  "password": "iamppretty#!"
+}, {
+  "username": "ify",
+  "name": {
+    "first": "Ifeanyi",
+    "last": "Oraelosi"
+  },
+  "email": "geniusify@gmail.com",
+  "password": "&%br&%ak&%th&%is&%#"
+}, {
+  "username": "adaora123",
+  "name": {
+    "first": "Adaora",
+    "last": "Nwachukwu"
+  },
+  "email": "queenada1@gmail.com",
+  "password": "queenada2015"
+}]
