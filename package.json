@@ -1,0 +1,24 @@
+{
+  "name": "API_Routing",
+  "version": "0.0.0",
+  "repository": "https://github.com/andela-batolagbe/API_Routing.git",
+  "license": "MIT",
+  "scripts": {
+    "test": "jasmine-node spec/ --captureExceptions --forceexit",
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "latest",
+    "cookie-parser": "^1.3.5",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "http-server": "latest",
+    "jasmine-node": "latest",
+    "jsonwebtoken": "^5.4.0",
+    "method-override": "latest",
+    "mongoose": "latest",
+    "morgan": "^1.6.1",
+    "supertest": "^1.1.0",
+    "validator": "^4.1.0"
+  }
+}
