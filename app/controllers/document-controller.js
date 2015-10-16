@@ -76,9 +76,8 @@ module.exports = {
   },
 
   getUserDocuments: function(req, res) {
-    Document.find({
-        ownerId: req.params.id
-      })
+    Document.find({})
+      .where('ownerId').equals(req.params.id)
       .populate('ownerId')
       .exec(function(err, doc) {
 
