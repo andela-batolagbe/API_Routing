@@ -98,7 +98,6 @@ describe('GET /documents/', function() {
     token = jwt.sign(newUser, secret.key, {
       expiresIn: 144000
     });
-
     done();
   });
 
@@ -181,11 +180,24 @@ describe('GET /documents/', function() {
 
   it('should find all documents accessible to a user', function(done) {
 
+    var newUser = new User(userData[1]);
+
+    newUser.save(function(err) {
+      if (err) {
+        console.log(err);
+      }
+    });
+
+    var userId = newUser.id;
+
+    var docDetail = docData[0];
     var docDetail2 = docData[4];
 
-    docDetail2.ownerId = id;
+    docDetail.ownerId = userId;
+    docDetail2.ownerId = userId;
 
-    var newDoc = new Document(docDetail2);
+    var newDoc = new Document(docDetail);
+    var newDoc2 = new Document(docDetail2);
 
     newDoc.save(function(err) {
       if (err) {
@@ -193,26 +205,33 @@ describe('GET /documents/', function() {
       }
     });
 
+    newDoc2.save(function(err) {
+      if (err) {
+        console.log(err);
+      }
+    });
+
     request(app)
-      .get('/users/' + id + '/documents')
+      .get('/users/' + userId + '/documents')
       .set('x-access-token', token)
       .expect('Content-Type', /json/)
       .end(function(err, response) {
- 
+   
         expect(response.statusCode).toBe(200);
         expect(response.body[0].title).toEqual('User introduction');
         expect(response.body[0].content)
           .toEqual('this is to introduce users to how our app work');
         expect(response.body[1].title).toEqual('How to make money');
-        expect(response.body[0].content)
+        expect(response.body[1].content)
           .toEqual('work, work work harder, harder, harder and harder, repeat from the beginning.');
-        expect(response.body[0].ownerId.username).toEqual('flyguy');
-        expect(response.body[1].ownerId.username).toEqual('flyguy');
+        expect(response.body[0].ownerId.username).toEqual('tobiscky');
+        expect(response.body[1].ownerId.username).toEqual('tobiscky');
         if (err) {
           return err;
         }
         done();
       });
+
   });
 
   it('should update document attributes', function(done) {
