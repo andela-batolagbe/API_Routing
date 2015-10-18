@@ -15,25 +15,25 @@ router.route('/users/login')
 router.route('/users/logout')
   .post(userController.logOutUser);
 
-//authenticate user
-router.use(userController.verifyUser);
+//authenticate user for the following routes
+// using the verifyUser middleware
 
 router.route('/users/:id')
-  .get(userController.getOneUser)
-  .put(userController.updateUser)
-  .delete(userController.removeUser);
+  .get(userController.verifyUser, userController.getOneUser)
+  .put(userController.verifyUser, userController.updateUser)
+  .delete(userController.verifyUser, userController.removeUser);
 
 router.route('/documents')
-  .post(docController.createDocument)
+  .post(userController.verifyUser, docController.createDocument)
   .get(docController.getAllDocuments);
 
 router.route('/documents/:id')
-  .get(docController.getOneDocument)
-  .put(docController.updateDocument)
-  .delete(docController.removeDocument);
+  .get(userController.verifyUser, docController.getOneDocument)
+  .put(userController.verifyUser, docController.updateDocument)
+  .delete(userController.verifyUser, docController.removeDocument);
 
 router.route('/users/:id/documents')
-  .get(docController.getUserDocuments);
+  .get(userController.verifyUser, docController.getUserDocuments);
 
 
 module.exports = router;

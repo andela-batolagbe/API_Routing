@@ -3,7 +3,12 @@ var User = require('../models/user-model');
 
 module.exports = {
 
-
+  /**
+   * [createDocument method to create new documents]
+   * @param  {JSON} req [request]
+   * @param  {JSON} res [response variable]
+   * @return {string}     [status message]
+   */
   createDocument: function(req, res) {
     var docData = req.body;
     var userId;
@@ -11,11 +16,11 @@ module.exports = {
       username: docData.user
     });
 
-    if (findUser && findUser !== [] && findUser !== {}) {
+    if (findUser) {
 
       userId = findUser._id;
     } else {
-      userId = '';
+      return 'cannot post document without user';
     }
 
     docData.ownerId = userId;
@@ -33,7 +38,12 @@ module.exports = {
     });
   },
 
-
+  /**
+   * [getAllDocuments get all documents in database]
+   * @param  {JSON} req [request variable]
+   * @param  {JSON} res [response variable]
+   * @return {JSON}     [document list]
+   */
   getAllDocuments: function(req, res) {
 
     Document.find({})
@@ -56,7 +66,13 @@ module.exports = {
 
   },
 
-
+    /**
+   * [getOneDocuments a single document]
+   * @param  {JSON} req [request variable]
+   * @param  {JSON} res [response variable]
+   * @return {JSON}     [document, if found, 
+   *                     message if not foud]
+   */
   getOneDocument: function(req, res) {
     Document.findById(req.params.id)
       .populate('ownerId')
@@ -75,6 +91,14 @@ module.exports = {
       });
   },
 
+    /**
+   * [getUserDocuments get all documents owned
+   * by a given user]
+   * @param  {JSON} req [request variable]
+   * @param  {JSON} res [response variable]
+   * @return {JSON}     [user document list, response 
+   *                          message if not found]
+   */
   getUserDocuments: function(req, res) {
     Document.find({})
       .where('ownerId').equals(req.params.id)
@@ -94,6 +118,13 @@ module.exports = {
       });
   },
 
+
+    /**
+   * [updateDocument update attributes of a document]
+   * @param  {JSON} req [request variable]
+   * @param  {JSON} res [response variable]
+   * @return {JSON}     [success message]
+   */
   updateDocument: function(req, res) {
 
 
@@ -111,6 +142,12 @@ module.exports = {
       });
   },
 
+    /**
+   * [removeDocument delete a document from database]
+   * @param  {JSON} req [request variable]
+   * @param  {JSON} res [response variable]
+   * @return {JSON}     [success message]
+   */
   removeDocument: function(req, res) {
 
     Document.findById(req.params.id)
