@@ -28,7 +28,6 @@ describe('POST /documents/', function() {
 
   it('should post new document', function(done) {
 
-
     var id, newUser = new User(userData[0]);
 
     newUser.save(function(err) {
@@ -216,7 +215,7 @@ describe('GET /documents/', function() {
       .set('x-access-token', token)
       .expect('Content-Type', /json/)
       .end(function(err, response) {
-   
+
         expect(response.statusCode).toBe(200);
         expect(response.body[0].title).toEqual('User introduction');
         expect(response.body[0].content)
